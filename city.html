@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!--costum styles-->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="graph_style.css">
+
+    <!--bootstrap-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+
+    <!--d3.js-->
+    <script src="d3.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/d3-tile@1"></script>
+    <script src="https://d3js.org/d3-hexbin.v0.2.min.js"></script>
+
+    <title>City Transit Infrastructure</title>
+</head>
+
+<body>
+    <nav class="navbar bg-body-tertiary fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.html">Transit Infrastructure WorldWide</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
+                aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar"
+                aria-labelledby="offcanvasNavbarLabel">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Avaliable cities</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                        <form class="d-flex mt-3" role="search">
+                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                            <button class="btn-search" type="submit">Search</button>
+                        </form>
+                        <ul id="cities-list"></ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <script src="app/helper.js"></script>
+    <script src="app/modal.js"></script>
+    <script src="app/graphs/city_map.js"></script>
+    <script src="app/graphs/circle.js"></script>
+    <script src="app/graphs/barchart.js"></script>
+    <script src="app/graphs/piechart.js"></script>
+    <script src="app/graphs/linechart.js"></script>
+    <script src="app/helper_cityPage.js"></script>
+    <script src="app/helper_switchPage.js"></script>
+    <div class="container-main">
+        <div class="text-container">
+            <div id="main-title" class="main-text main-title"></div>
+        </div>
+        <div class="item row-items wide" id="circles">
+            <div id="circle-systems"></div>
+            <div id="circle-lines"></div>
+            <div id="circle-linesLen"></div>
+            <div id="circle-stations"></div>
+            <div id="circle-tracks"></div>
+            <div id="circle-tracksLen"></div>
+        </div>
+        <div class="item wide">
+            <div class="row-items container-inside centered-top" id="main-container">
+                <div class="row-items" id="city">
+                    <div id="city-map"></div>
+                    <div class="container-column">
+                        <div class="button-container">
+                            <button id="zoom-in" class="btn-zoom">+</button>
+                            <button id="zoom-out" class="btn-zoom">-</button>
+                        </div>
+                        <div class="checkboxesContainer" id="checkboxesStart"></div>
+                    </div>
+                    <div class="checkboxesContainer" id="checkboxesStartSystems"></div>
+                </div>
+            </div>
+            <div class="checkboxes" id="checkboxesSystems"></div>
+            <div class="map-container">
+                <div id="systems-map" class="systems-map"></div>
+            </div>
+        </div>
+        <div class="grouped">
+            <div id="linesLen-barchart" class="item"></div>
+            <div id="stationsCount-barchart" class="item"></div>
+        </div>
+        <div class="item row-items wide">
+            <div id="linesLen-piechart"></div>
+            <div id="linesStations-piechart"></div>
+        </div>
+        <div class="grouped">
+            <div id="linesCount-barchart" class="item"></div>
+            <div id="linesCount-piechart" class="item fixed-height centered"></div>
+        </div>
+        <div class="grouped">
+            <div id="systemLen-barchart" class="item"></div>
+            <div id="systemLen-piechart" class="item fixed-height centered"></div>
+        </div>
+        <div class="grouped">
+            <div id="systemStations-barchart" class="item"></div>
+            <div id="systemStations-piechart" class="item fixed-height centered"></div>
+        </div>
+
+        <div class="item centered wide">
+            <div id="linechart"></div>
+        </div>
+        <div class="item centered wide">
+            <div id="linechart-tracks"></div>
+        </div>
+        <div class="dashboard-container-big" id="dashboard-container-big">
+            <div id="smallText1" class="item centered"></div>
+            <div id="smallText2" class="item centered"></div>
+            <div id="smallText3" class="item centered"></div>
+            <div id="smallText4" class="item centered"></div>
+            <div id="smallText5" class="item centered"></div>
+            <div id="smallText6" class="item centered"></div>
+            <div id="smallBar1" class="item"></div>
+            <div id="smallBar2" class="item"></div>
+            <div id="smallPie1" class="item"></div>
+            <div id="smallPie2" class="item"></div>
+            <div id="smallPie3" class="item"></div>
+            <div id="smallLine1" class="item"></div>
+            <div id="smallLine2" class="item"></div>
+            <div id="smallMap-container" class="item">
+                <div id="smallMap"></div>
+                <div class="dropdowns">
+                    <div class="dropdown">
+                        <button onclick="toggleDropdown('dropdown-content')" class="btn-search">
+                            <div class=''>Filters</div>
+                        </button>
+                        <div id="dropdown-content" class="dropdown-content">
+                            <div class="checkboxesContainer" id="checkboxesDashboard"></div>
+                        </div>
+                    </div>
+
+                    <div class="dropdown">
+                        <button onclick="toggleDropdown('systems-dropdown-content')" class="btn-search">
+                            <div class="">Systems</div>
+                        </button>
+                        <div id="systems-dropdown-content" class="dropdown-content">
+                            <div class="checkboxesContainer" id="checkboxesDashboardSystems"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="grouped settings">
+            <div class="switches">
+                <div class="switch-group">
+                    Dark mode:
+                    <label class="switch">
+                        <input type="checkbox" id="darkModeToggle">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+                <div class="switch-group">
+                    Dashboard:
+                    <label class="switch">
+                        <input type="checkbox" id="dashboardToggle">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+                <div class="switch-group">
+                    More accessible:
+                    <label class="switch">
+                        <input type="checkbox" id="patternToggle">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            </div>
+            <div id="info-data">
+                <div>Data avaliable at:</div>
+                <a class="link" href="https://www.kaggle.com/datasets/citylines/city-lines">Transit systems of
+                    world - small dataset</a><br />
+                <a class="link" href="https://www.citylines.co/data">Transit systems of
+                    world</a><br />
+                <a class="link"
+                    href="http://web.archive.org/web/20180423190124/http://www.vdstech.com/world-data.aspx">City
+                    shapes</a><br />
+            </div>
+            <div id="info-project">
+                <div>Visualization avaliable at:</div>
+                <a class="link" href="https://github.com/jradak01/Transit_Infrastructure_Worldwide">Project</a>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

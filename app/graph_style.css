@@ -1,0 +1,136 @@
+@font-face {
+    font-family: 'Nunito';
+    src: url('Nunito-VariableFont_wght.ttf');
+}
+
+.text {
+    font-family: 'Nunito', sans-serif;
+    fill: #2E3235;
+}
+.helper-text {
+    font-size: 10px;
+    font-weight: bold;
+    text-anchor: middle;
+}
+body.dashboard .helper-text{
+    font-size: 8px;
+}
+.tooltip-text {
+    font-size: 14px;
+    text-anchor: middle;
+}
+.tooltip-main-text{
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.title {
+    font-size: 20px;
+    text-anchor: middle;
+}
+.x-axis{
+    font-size: 10px;
+}
+body.dashboard .x-axis{
+    font-size: 6px;
+}
+.y-axis{
+    font-size: 10px;
+}
+body.dashboard .y-axis{
+    font-size: 6px;
+}
+body.dashboard .title{
+    font-size: 12px;
+}
+.legend-text{
+    font-size: 16px;
+}
+body.dashboard .legend-text{
+    font-size: 10px;
+}
+.empty-circle{
+    stroke: #2E3235;
+    fill: none;
+}
+.axis-label {
+    font-size: 14px;
+    text-anchor: middle;
+}
+body.dashboard .axis-label{
+    font-size: 8px;
+}
+.bar-label {
+    font-size: 12px;
+    text-anchor: middle;
+}
+body.dashboard .bar-label{
+    font-size: 8px;
+}
+.map-tile {
+    opacity: 0.7;
+    filter: saturate(0.1);
+}
+body.dark-mode .map-tile{
+    opacity: 0.7;
+    filter: saturate(0) invert(100%);
+}
+.land{
+    fill: #dfd6d7;
+    stroke: white;
+}
+body.dark-mode .land{
+    fill: #404040;
+    stroke: #16191C;
+}
+.sea {
+    fill: white;
+}
+body.dark-mode .sea{
+    fill: #16191C;
+}
+.line-chart-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.line-chart {
+    margin-bottom: 20px;
+}
+.year-slider-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+.systems-map {
+    display: grid;
+    width: 100%;
+    grid-template-columns: repeat(auto-fill, minmax(32%, 1fr));
+    gap: 10px;
+    row-gap: 30px;
+}
+body.dark-mode .text{
+    fill: white;
+}
+.tooltip-bg{
+    fill: #ffffff;
+}
+body.dark-mode .tooltip-bg{
+    fill: #212529;
+}
+body.dark-mode .tooltip{
+    background: #212529;
+}
+.tooltip{
+    background: #ffffff;
+}
+body.dark-mode .empty-circle{
+    stroke:  #ffffff;
+    fill: none;
+}
+.circle-info{
+    fill: #ffffff;
+}
+body.dark-mode .circle-info{
+    fill: #16191C;
+}
